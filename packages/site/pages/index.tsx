@@ -56,8 +56,6 @@ export default function HomeScreen(): JSX.Element {
 export async function getStaticProps(): Promise<{ props: any }> {
   const { apolloCache } = await cmsGreetService().useServer();
 
-  // console.log(data);
-
   return {
     props: {
       ...apolloCache,
