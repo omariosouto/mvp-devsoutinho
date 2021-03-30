@@ -21,6 +21,7 @@
     "ui": "yarn workspace @devsoutinho/ui",
     "dev:ui": "yarn ui dev",
     "build:ui": "yarn ui build",
-    "lint": "yarn workspace @devsoutinho/eslint-config-devsoutinho"
+    "lint": "yarn workspace @devsoutinho/eslint-config-devsoutinho",
+    "lint:ui": "yarn ui lint"
   }
 }
