@@ -10,4 +10,7 @@ module.exports = withPlugins([withTM], {
     webpack5: true,
   },
   trailingSlash: true,
+  images: {
+    domains: ['unavatar.now.sh'],
+  },
 });
