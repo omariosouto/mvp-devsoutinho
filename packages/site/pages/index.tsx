@@ -1,4 +1,6 @@
 import React from 'react';
+import Image from 'next/image';
+import Head from 'next/head';
 import { cmsGreetService } from '@devsoutinho/cms/services/greet';
 import Text from '@devsoutinho/ui/src/components/foundation/Text';
 
@@ -31,9 +33,18 @@ export default function HomeScreen(): JSX.Element {
 
   return (
     <main>
+      <Head>
+        <title>Mario Souto</title>
+      </Head>
+
       <Text as="h1">Mario Souto</Text>
 
-      <img src="https://unavatar.now.sh/github/omariosouto" />
+      <Image
+        src="https://unavatar.now.sh/github/omariosouto"
+        alt="Imagem de perfil do Mario Souto"
+        width="400"
+        height="400"
+      />
 
       <div>{JSON.stringify(data)}</div>
 
