@@ -1,0 +1,6 @@
+{
+  "extends": [
+    "@devsoutinho/eslint-config-devsoutinho",
+    "plugin:prettier/recommended"
+  ]
+}

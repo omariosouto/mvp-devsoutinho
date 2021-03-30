@@ -1,9 +1,9 @@
-import { handler } from '@devsoutinho/cms/server/handler';
+import { handler } from "@devsoutinho/cms/server/handler";
 
 export const config = {
-    api: {
-      bodyParser: false
-    }
-  };
+  api: {
+    bodyParser: false,
+  },
+};
 
 export default handler;

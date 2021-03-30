@@ -5,10 +5,12 @@
   "scripts": {
     "start": "next start",
     "dev": "next dev",
-    "build": "next build"
+    "build": "next build",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@apollo/client": "3.3.13",
+    "@devsoutinho/eslint-config-devsoutinho": "*",
     "@devsoutinho/cms": "*",
     "@devsoutinho/ui": "*",
     "next": "10.1.1",
@@ -19,6 +21,7 @@
     "styled-components": "^5.0.0"
   },
   "devDependencies": {
+    "eslint": "^7.23.0",
     "@types/node": "14.14.37",
     "@types/react": "^17.0.3",
     "@types/react-dom": "17.0.3",

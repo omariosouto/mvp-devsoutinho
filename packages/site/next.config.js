@@ -1,12 +1,13 @@
-const withPlugins = require('next-compose-plugins');
-const withTM = require('next-transpile-modules')([
-    '@devsoutinho/cms',
-    '@devsoutinho/ui'
+/* eslint-disable @typescript-eslint/no-var-requires */
+const withPlugins = require("next-compose-plugins");
+const withTM = require("next-transpile-modules")([
+  "@devsoutinho/cms",
+  "@devsoutinho/ui",
 ]);
 
 module.exports = withPlugins([withTM], {
-    trailingSlash: true,
-    future: {
-        webpack5: false,
-    },
+  future: {
+    webpack5: false,
+  },
+  trailingSlash: true,
 });
