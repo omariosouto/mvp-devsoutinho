@@ -1,0 +1,21 @@
+{
+  "name": "devsoutinho",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/omariosouto/mvp-devsoutinho.git",
+  "author": "Mario Souto <devsoutinho@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": []
+  },
+  "scripts": {
+    "site": "yarn workspace @devsoutinho/site",
+    "dev:site": "yarn site dev",
+    "build:site": "yarn site build",
+    "start:site": "yarn site build:site && yarn site start"
+  }
+}

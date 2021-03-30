@@ -1,0 +1,11 @@
+{
+    "name": "@devsoutinho/cms",
+    "version": "0.0.1",
+    "license": "MIT",
+    "main": "./index.ts",
+    "dependencies": {
+        "@apollo/client": "3.3.13",
+        "apollo-server-micro": "2.22.2",
+        "graphql": "15.5.0"
+    }
+}
