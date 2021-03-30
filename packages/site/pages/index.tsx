@@ -1,6 +1,6 @@
 import React from 'react';
 import { cmsGreetService } from '@devsoutinho/cms/services/greet'
-import Text from '@devsoutinho/ui/components/foundation/Text';
+import Text from '@devsoutinho/ui/src/components/foundation/Text';
 
 const links = [
     {

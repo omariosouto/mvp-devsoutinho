@@ -1,0 +1,19 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+
+
+<Meta title="Example/Introduction" />
+
+# Welcome to Storybook
+
+Sample description
+
+## Botão Simples
+
+<Canvas>
+  <Story
+    name="Botão Simples"
+    args={{ children: 'Botão Simples' }}
+  >
+    {(args) => <div>oi</div>}
+  </Story>
+</Canvas>
