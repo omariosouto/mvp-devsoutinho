@@ -42,6 +42,7 @@ module.exports = {
       {
         "allow": ["warn", "error"]
       }
-    ]
+    ],
+    "prettier/prettier": ["error", { "singleQuote": true }]
   }
 }

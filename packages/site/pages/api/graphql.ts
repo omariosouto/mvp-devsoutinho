@@ -1,4 +1,4 @@
-import { handler } from "@devsoutinho/cms/server/handler";
+import { handler } from '@devsoutinho/cms/server/handler';
 
 export const config = {
   api: {

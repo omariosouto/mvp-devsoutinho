@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { ApolloProvider } from "@apollo/client";
-import { useApollo } from "@devsoutinho/cms/infra/graphql/client";
-import UIProvider from "@devsoutinho/ui/src/theme/UIProvider";
-import GlobalStyle from "@devsoutinho/ui/src/theme/GlobalStyle";
+import React, { useState } from 'react';
+import { ApolloProvider } from '@apollo/client';
+import { useApollo } from '@devsoutinho/cms/infra/graphql/client';
+import UIProvider from '@devsoutinho/ui/src/theme/UIProvider';
+import GlobalStyle from '@devsoutinho/ui/src/theme/GlobalStyle';
 
 export default function App({
   Component,
@@ -12,14 +12,14 @@ export default function App({
   pageProps: any;
 }): JSX.Element {
   const apolloClient = useApollo(pageProps.initialApolloState);
-  const [currentTheme, setTheme] = useState<"light" | "dark">("light");
+  const [currentTheme, setTheme] = useState<'light' | 'dark'>('light');
   return (
     <ApolloProvider client={apolloClient}>
       <UIProvider theme={currentTheme}>
         <GlobalStyle />
         <button
           onClick={(): void =>
-            setTheme(currentTheme === "light" ? "dark" : "light")
+            setTheme(currentTheme === 'light' ? 'dark' : 'light')
           }
         >
           Change theme [{currentTheme}]

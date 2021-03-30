@@ -1,28 +1,28 @@
-import React from "react";
-import { cmsGreetService } from "@devsoutinho/cms/services/greet";
-import Text from "@devsoutinho/ui/src/components/foundation/Text";
+import React from 'react';
+import { cmsGreetService } from '@devsoutinho/cms/services/greet';
+import Text from '@devsoutinho/ui/src/components/foundation/Text';
 
 const links = [
   {
-    description: "",
-    text: "YouTube",
-    url: "#youtube",
+    description: '',
+    text: 'YouTube',
+    url: '#youtube',
   },
   {
-    description: "",
-    text: "Comunidade: Squad do DevSoutinho",
-    url: "#comunidade",
+    description: '',
+    text: 'Comunidade: Squad do DevSoutinho',
+    url: '#comunidade',
   },
   {
-    description: "",
-    text: "Lojinha",
-    url: "#lojinha",
+    description: '',
+    text: 'Lojinha',
+    url: '#lojinha',
   },
   {
     description:
-      "Aqui tem uma lista com todas as contribuições que eu fiz desde o meu primeiro post!",
-    text: "Log de Contribuições com a Comunidade",
-    url: "#contribuicoes",
+      'Aqui tem uma lista com todas as contribuições que eu fiz desde o meu primeiro post!',
+    text: 'Log de Contribuições com a Comunidade',
+    url: '#contribuicoes',
   },
 ];
 
