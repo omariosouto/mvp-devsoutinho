@@ -3,28 +3,29 @@ import Image from 'next/image';
 import Head from 'next/head';
 import { cmsGreetService } from '@devsoutinho/cms/services/greet';
 import Text from '@devsoutinho/ui/src/components/foundation/Text';
+import Link from '../src/components/commons/Link';
 
 const links = [
   {
     description: '',
     text: 'YouTube',
-    url: '#youtube',
+    url: '/go/youtube/',
   },
   {
     description: '',
     text: 'Comunidade: Squad do DevSoutinho',
-    url: '#comunidade',
+    url: '/go/comunidade/',
   },
   {
     description: '',
     text: 'Lojinha',
-    url: '#lojinha',
+    url: '/lojinha',
   },
   {
     description:
       'Aqui tem uma lista com todas as contribuições que eu fiz desde o meu primeiro post!',
     text: 'Log de Contribuições com a Comunidade',
-    url: '#contribuicoes',
+    url: '/contribuicoes',
   },
 ];
 
@@ -52,10 +53,10 @@ export default function HomeScreen(): JSX.Element {
         {links.map(({ url, description, text }) => (
           <li key={url}>
             <article>
-              <a href={url}>
+              <Link href={url}>
                 <h1>{text}</h1>
                 <p>{description}</p>
-              </a>
+              </Link>
             </article>
           </li>
         ))}

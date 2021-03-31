@@ -13,4 +13,20 @@ module.exports = withPlugins([withTM], {
   images: {
     domains: ['unavatar.now.sh'],
   },
+  async redirects() {
+    const redirects = [
+      {
+        source: '/go/youtube/',
+        destination: 'https://youtube.com/DevSoutinho',
+        permanent: true,
+      },
+      {
+        source: '/go/comunidade/',
+        destination: 'https://discord.gg/SpsBHQJeXb',
+        permanent: true,
+      },
+    ];
+
+    return redirects;
+  },
 });

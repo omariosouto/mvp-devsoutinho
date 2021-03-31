@@ -10,6 +10,13 @@ const GlobalStyle = createGlobalStyle`
       background-color: ${({ theme }) => theme.colors.background.main.color};
       color: ${({ theme }) => theme.colors.background.main.contrastColor};
     }
+
+    a {
+      color: ${({ theme }) => theme.colors.primary.main.color};
+      &:hover {
+        opacity: .5;
+      }
+    }    
 `;
 
 export default GlobalStyle;

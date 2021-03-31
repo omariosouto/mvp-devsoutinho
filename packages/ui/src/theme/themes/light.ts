@@ -4,13 +4,17 @@ const theme: DefaultTheme = {
   colors: {
     background: {
       main: {
-        color: '#ffffff',
+        color: '#fafafa',
         contrastColor: '#000000',
+      },
+      light: {
+        color: '#000000',
+        contrastColor: '#ffffff',
       },
     },
     primary: {
       main: {
-        color: 'orange',
+        color: '#ff6a00',
         contrastColor: 'black',
       },
     },

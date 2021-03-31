@@ -12,7 +12,7 @@ export default function App({
   pageProps: any;
 }): JSX.Element {
   const apolloClient = useApollo(pageProps.initialApolloState);
-  const [currentTheme, setTheme] = useState<'light' | 'dark'>('light');
+  const [currentTheme, setTheme] = useState<'light' | 'dark'>('dark');
   return (
     <ApolloProvider client={apolloClient}>
       <UIProvider theme={currentTheme}>

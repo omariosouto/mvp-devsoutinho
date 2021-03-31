@@ -6,6 +6,10 @@ interface Color {
     color: string;
     contrastColor: string;
   };
+  light?: {
+    color: string;
+    contrastColor: string;
+  };
 }
 
 interface ThemeColor {

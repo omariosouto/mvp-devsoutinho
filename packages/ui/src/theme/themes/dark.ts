@@ -4,7 +4,11 @@ const theme: DefaultTheme = {
   colors: {
     background: {
       main: {
-        color: '#000000',
+        color: '#2c2c2c',
+        contrastColor: '#ffffff',
+      },
+      light: {
+        color: '#393939',
         contrastColor: '#ffffff',
       },
     },
