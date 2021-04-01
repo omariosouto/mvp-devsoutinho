@@ -5,10 +5,10 @@ const theme: DefaultTheme = {
     background: {
       main: {
         color: '#fafafa',
-        contrastColor: '#000000',
+        contrastColor: '#333333',
       },
       light: {
-        color: '#000000',
+        color: '#333333',
         contrastColor: '#ffffff',
       },
     },

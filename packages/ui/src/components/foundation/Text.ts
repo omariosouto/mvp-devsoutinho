@@ -1,7 +1,14 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-const Text = styled.span`
-  color: ${({ theme }) => theme.colors.primary.main.color};
+interface TextProps {
+  textAlign?: 'center' | 'right' | 'left' | 'justify';
+}
+const Text = styled.span<TextProps>`
+  ${({ textAlign }) =>
+    textAlign &&
+    css`
+      text-align: ${textAlign};
+    `}
 `;
 
 export default Text;
