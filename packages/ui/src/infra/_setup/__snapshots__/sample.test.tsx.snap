@@ -1,9 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`sample snapshot 1`] = `
+.c0 {
+  background: #ff6a00;
+}
+
 <div>
   <div
-    class="sc-bdfBwQ iYkQxA"
+    class="c0"
   >
     Hi
   </div>
