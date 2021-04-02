@@ -15,7 +15,6 @@
       "**/nedb/**",
       "**/nedb-promises-ts",
       "**/nedb-promises-ts/**"
-      
     ]
   },
   "scripts": {
