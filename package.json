@@ -16,7 +16,7 @@
     "site": "yarn workspace @devsoutinho/site",
     "dev:site": "yarn site dev",
     "build:site": "yarn site build",
-    "start:site": "yarn site build:site && yarn site start",
+    "start:site": "yarn site start",
     "lint:site": "yarn site lint",
     "test:site": "yarn site test",
     "ui": "yarn workspace @devsoutinho/ui",
