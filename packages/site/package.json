@@ -16,12 +16,16 @@
     "next": "10.1.1",
     "next-compose-plugins": "^2.2.1",
     "next-transpile-modules": "^6.3.0",
+    "nookies": "^2.5.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "styled-components": "^5.0.0"
   },
   "devDependencies": {
     "@devsoutinho/eslint-config-devsoutinho": "*",
+    "@testing-library/jest-dom": "^5.11.10",
+    "@testing-library/react": "^11.2.6",
+    "@testing-library/react-hooks": "^5.1.1",
     "@types/jest": "^26.0.20",
     "@types/node": "14.14.37",
     "@types/react": "^17.0.3",
@@ -35,9 +39,6 @@
     "jest-canvas-mock": "^2.3.1",
     "jest-styled-components": "^7.0.3",
     "jest-watch-typeahead": "^0.6.1",
-    "@testing-library/jest-dom": "^5.11.10",
-    "@testing-library/react": "^11.2.6",
-    "@testing-library/react-hooks": "^5.1.1",
     "ts-jest": "^26.5.4",
     "typescript": "4.2.3"
   }

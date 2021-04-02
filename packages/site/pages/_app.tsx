@@ -1,4 +1,5 @@
 import React from 'react';
+import { parseCookies, setCookie } from 'nookies';
 import styled from 'styled-components';
 import { ApolloProvider } from '@apollo/client';
 import { useApollo } from '@devsoutinho/cms/infra/graphql/client';
@@ -36,6 +37,7 @@ const ToggleWrapper = styled.label`
   span {
     width: 50%;
     text-align: center;
+    pointer-events: none;
   }
   input {
     display: none;
@@ -48,7 +50,7 @@ const ToggleWrapper = styled.label`
   }
 `;
 
-function ToggleTheme({ toggleTheme }) {
+function ToggleTheme({ theme, toggleTheme }) {
   return (
     <ToggleWrapper
       htmlFor="themeToggle"
@@ -59,7 +61,12 @@ function ToggleTheme({ toggleTheme }) {
         }
       }}
     >
-      <input id="themeToggle" type="checkbox" onChange={toggleTheme} />
+      <input
+        id="themeToggle"
+        type="checkbox"
+        onClick={toggleTheme}
+        defaultChecked={Boolean(theme === 'light')}
+      />
       <span className="dark">🌑</span>
       <span className="light">☀️</span>
       <span className="thumb"></span>
@@ -74,18 +81,27 @@ export default function App({
   Component: any;
   pageProps: any;
 }): JSX.Element {
-  const [currentTheme, setTheme] = React.useState<'light' | 'dark'>('dark');
+  const cookies = parseCookies(null);
+  const savedTheme = cookies.theme as 'light' | 'dark';
+  const [currentTheme, setTheme] = React.useState<'light' | 'dark'>(
+    savedTheme || 'dark'
+  );
   const apolloClient = useApollo(pageProps.initialApolloState);
 
   function toggleTheme() {
-    setTheme(currentTheme === 'light' ? 'dark' : 'light');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    setCookie(null, 'theme', newTheme, {
+      maxAge: 30 * 24 * 60 * 60,
+      path: '/',
+    });
   }
 
   return (
     <ApolloProvider client={apolloClient}>
       <UIProvider theme={currentTheme}>
         <GlobalStyle />
-        <ToggleTheme toggleTheme={toggleTheme} />
+        <ToggleTheme theme={currentTheme} toggleTheme={toggleTheme} />
         <Component {...pageProps} />
       </UIProvider>
     </ApolloProvider>
