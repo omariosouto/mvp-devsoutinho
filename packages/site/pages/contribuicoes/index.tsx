@@ -2,21 +2,15 @@ import React from 'react';
 import Head from 'next/head';
 import Text from '@devsoutinho/ui/src/components/foundation/Text';
 import Link from '../../src/components/commons/Link';
-
-const links = [
-  {
-    description:
-      'Tenho pela casa toda, inclusive no banheiro!!! ashuasshua vale a pena comprar pra começar seu projeto de automação residêncial, ou só para ouvir as notícias no banheiro mesmo',
-    text: 'Echo Dot (3ª Geração): Smart Speaker com Alexa - Cor Preta',
-    url: 'https://amzn.to/31EevzT',
-  },
-];
+import { cmsContributionsService } from '@devsoutinho/cms/services/contributions';
 
 export default function LojinhaScreen(): JSX.Element {
+  const { data } = cmsContributionsService().useClient();
+
   return (
     <main>
       <Head>
-        <title>🛒 Lojinha | Mario Souto / DevSoutinho</title>
+        <title>⚠️✨ Contribuições | Mario Souto / DevSoutinho</title>
       </Head>
 
       <div className="container">
@@ -46,21 +40,19 @@ export default function LojinhaScreen(): JSX.Element {
           <div className="headerCard__divider">
             <Text as="p">
               {`
-                Aqui vai uma série de itens que ou eu comprei, ou eu acho massa e
-                cada um tem um "mini depoimento" pra ajudar você naquele momento
-                "será que vale a pena comprar?" ou "pra que que eu vou usar?"
+                ⚠️ Aqui a ideia é ter uma lista com todas as contribuições que eu vim fazendo ao
+                longo dos últimos anos, por hora ta WIP, mas vai sair ⚠️
               `}
             </Text>
           </div>
         </header>
 
         <ul className="blocks-container">
-          {links.map(({ url, description, text }) => (
+          {data.contributions.map(({ url, name }) => (
             <li key={url}>
               <article>
                 <Link href={url}>
-                  <h1>{text}</h1>
-                  <p>{description}</p>
+                  <h1>{name}!</h1>
                 </Link>
               </article>
             </li>
@@ -69,4 +61,14 @@ export default function LojinhaScreen(): JSX.Element {
       </div>
     </main>
   );
+}
+
+export async function getStaticProps(): Promise<{ props: any }> {
+  const { apolloCache } = await cmsContributionsService().useServer();
+
+  return {
+    props: {
+      ...apolloCache,
+    },
+  };
 }

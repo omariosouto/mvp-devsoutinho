@@ -1,23 +1,31 @@
-import { useQuery, gql } from '@apollo/client';
+import { useQuery, gql, QueryResult, OperationVariables } from '@apollo/client';
 import { initializeApollo } from '@devsoutinho/cms/infra/graphql/client';
 
 import { withApolloCache } from '../../infra/apollo/withApolloCache';
 
-const sampleQuery = gql`
+const query = gql`
   query {
-    greet
+    contributions {
+      name
+      url
+    }
   }
 `;
 
-export function cmsGreetService() {
+interface Service {
+  useClient: () => QueryResult<any, OperationVariables>;
+  useServer(): Promise<any>;
+}
+
+export function cmsContributionsService(): Service {
   return {
-    useClient: () => useQuery(sampleQuery),
+    useClient: () => useQuery(query),
     async useServer() {
       const apolloClient = initializeApollo();
       return {
         apolloClient,
         ...(await apolloClient.query({
-          query: sampleQuery,
+          query,
         })),
         apolloCache: withApolloCache(apolloClient),
       };
