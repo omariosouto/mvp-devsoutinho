@@ -1,4 +1,4 @@
-import Datastore from 'nedb-promises-ts';
+import Datastore from 'nedb';
 import { Contribution } from '../../modules/contributions/type';
 
 interface DevSoutinhoDatabase {

@@ -30,16 +30,28 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     async contributions(): Promise<Contribution[]> {
-      return getDbConnection().contributions.find({});
+      return new Promise((resolve, reject) =>
+        getDbConnection().contributions.find({}, (err, data) => {
+          if (err) reject(err);
+          resolve(data);
+        })
+      );
     },
     async contribution(
       _: unknown,
       { input }: { input: ContributionInput }
     ): Promise<Contribution> {
-      const result = await getDbConnection().contributions.findOne({
-        ...input,
-      });
-      return result;
+      return new Promise((resolve, reject) =>
+        getDbConnection().contributions.findOne(
+          {
+            ...input,
+          },
+          (err, data) => {
+            if (err) reject(err);
+            resolve(data);
+          }
+        )
+      );
     },
   },
 };

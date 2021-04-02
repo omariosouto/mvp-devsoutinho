@@ -3,10 +3,6 @@ import Head from 'next/head';
 import { cmsGreetService } from '../cms/services/greet';
 import Text from '@devsoutinho/ui/src/components/foundation/Text';
 import Link from '../src/components/commons/Link';
-import Datastore from 'nedb-promises-ts';
-
-// eslint-disable-next-line no-console
-console.log(Datastore);
 
 const links = [
   {
