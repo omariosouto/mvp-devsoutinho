@@ -1,10 +1,10 @@
 import { gql } from 'apollo-server-micro';
-import { getDbConnection } from '../../infra/db/dbFactory';
+// import { getDbConnection } from '../../infra/db/dbFactory';
 import { Contribution } from './type';
 
-interface ContributionInput {
-  name: string;
-}
+// interface ContributionInput {
+//   name: string;
+// }
 
 const typeDefs = gql`
   type Contribution {
@@ -30,16 +30,34 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     async contributions(): Promise<Contribution[]> {
-      return getDbConnection().contributions.find({});
+      // return getDbConnection().contributions.find({});
+      return [
+        {
+          lang: 'pt-BR',
+          date: '2021-03-26T03:00:00.000Z',
+          name:
+            'Como colocar seu projeto no ar DE GRAÇA via GitHub! | Hospedagem com GitHub Pages',
+          description: '',
+          url: 'https://www.youtube.com/watch?v=BU-w2_Aae54',
+          _id: 'jaLdRohM2qMvWIOQ',
+        },
+      ];
     },
-    async contribution(
-      _: unknown,
-      { input }: { input: ContributionInput }
-    ): Promise<Contribution> {
-      const result = await getDbConnection().contributions.findOne({
-        ...input,
-      });
-      return result;
+    async contribution(): // _: unknown,
+    // { input }: { input: ContributionInput }
+    Promise<Contribution> {
+      // const result = await getDbConnection().contributions.findOne({
+      //   ...input,
+      // });
+      return {
+        lang: 'pt-BR',
+        date: '2021-03-26T03:00:00.000Z',
+        name:
+          'Como colocar seu projeto no ar DE GRAÇA via GitHub! | Hospedagem com GitHub Pages',
+        description: '',
+        url: 'https://www.youtube.com/watch?v=BU-w2_Aae54',
+        _id: 'jaLdRohM2qMvWIOQ',
+      };
     },
   },
 };
