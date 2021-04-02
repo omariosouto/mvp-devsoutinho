@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import Text from '@devsoutinho/ui/src/components/foundation/Text';
 import Link from '../../src/components/commons/Link';
-import { cmsContributionsService } from '@devsoutinho/cms/services/contributions';
+import { cmsContributionsService } from '../../cms/services/contributions';
 
 export default function LojinhaScreen(): JSX.Element {
   const { data } = cmsContributionsService().useClient();
