@@ -1,6 +1,7 @@
 {
     "eslint.workingDirectories": [
       "packages/site",
+      "packages/cms",
       "packages/ui",
     ]
 }

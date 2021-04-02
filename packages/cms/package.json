@@ -6,6 +6,13 @@
     "dependencies": {
         "@apollo/client": "3.3.13",
         "apollo-server-micro": "2.22.2",
-        "graphql": "15.5.0"
+        "graphql": "15.5.0",
+        "nedb": "^1.8.0",
+        "nedb-promises-ts": "^0.0.1-4"
+    },
+    "devDependencies": {
+        "@devsoutinho/eslint-config-devsoutinho": "*",
+        "eslint": "^7.23.0",
+        "eslint-plugin-prettier": "3.3.1"
     }
 }
