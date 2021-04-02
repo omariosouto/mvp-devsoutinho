@@ -10,7 +10,7 @@
     "packages": [
       "packages/*"
     ],
-    "nohoist": []
+    "nohoist": ["**/nedb", "**/nedb/**"]
   },
   "scripts": {
     "site": "yarn workspace @devsoutinho/site",
