@@ -33,8 +33,7 @@ const resolvers = {
       return getDbConnection().contributions.find({});
     },
     async contribution(
-      // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-      _,
+      _: unknown,
       { input }: { input: ContributionInput }
     ): Promise<Contribution> {
       const result = await getDbConnection().contributions.findOne({

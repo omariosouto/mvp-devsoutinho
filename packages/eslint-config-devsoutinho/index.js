@@ -24,10 +24,11 @@ module.exports = {
     "react/react-in-jsx-scope": 0,
     "react/display-name": 0,
     "react/prop-types": 0,
+    "@typescript-eslint/no-explicit-any": ["error", { "fixToUnknown": true, "ignoreRestArgs": true }],
     "@typescript-eslint/explicit-module-boundary-types": [
       "warn",
       {
-        "allowedNames": ["_", "ignoredFunctionName", "ignoredMethodName"]
+        "allowArgumentsExplicitlyTypedAsAny": false,
       }
     ],
     "@typescript-eslint/explicit-function-return-type": 0,
