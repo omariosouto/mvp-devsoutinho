@@ -10,7 +10,13 @@
     "packages": [
       "packages/*"
     ],
-    "nohoist": ["**/nedb", "**/nedb/**"]
+    "nohoist": [
+      "**/nedb",
+      "**/nedb/**",
+      "**/nedb-promises-ts",
+      "**/nedb-promises-ts/**"
+      
+    ]
   },
   "scripts": {
     "site": "yarn workspace @devsoutinho/site",
