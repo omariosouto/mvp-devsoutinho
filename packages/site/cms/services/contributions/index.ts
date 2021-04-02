@@ -1,6 +1,5 @@
 import { useQuery, gql, QueryResult, OperationVariables } from '@apollo/client';
-import { initializeApollo } from '@devsoutinho/cms/infra/graphql/client';
-
+import { initializeApollo } from '../../infra/graphql/client';
 import { withApolloCache } from '../../infra/apollo/withApolloCache';
 
 const query = gql`

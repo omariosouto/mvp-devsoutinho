@@ -1,5 +1,5 @@
 import { useQuery, gql } from '@apollo/client';
-import { initializeApollo } from '@devsoutinho/cms/infra/graphql/client';
+import { initializeApollo } from '../../infra/graphql/client';
 
 import { withApolloCache } from '../../infra/apollo/withApolloCache';
 

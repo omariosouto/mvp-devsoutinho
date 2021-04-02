@@ -2,7 +2,7 @@ import React from 'react';
 import { parseCookies, setCookie } from 'nookies';
 import styled from 'styled-components';
 import { ApolloProvider } from '@apollo/client';
-import { useApollo } from '@devsoutinho/cms/infra/graphql/client';
+import { useApollo } from '../cms/infra/graphql/client';
 import UIProvider from '@devsoutinho/ui/src/theme/UIProvider';
 import GlobalStyle from '@devsoutinho/ui/src/theme/GlobalStyle';
 
