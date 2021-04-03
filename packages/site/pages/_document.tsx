@@ -57,21 +57,6 @@ export default class MyDocument extends Document {
             ></iframe>
           </noscript>
           {/* <!-- End Google Tag Manager (noscript) --> */}
-          {/* Google Analytics */}
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-
-                    gtag('config', '${gtag.GA_TRACKING_ID}', {
-                      page_path: window.location.pathname,
-                    });
-                  `,
-            }}
-          />
-          {/* End Google Analytics */}
           <Main />
           <NextScript />
         </body>
