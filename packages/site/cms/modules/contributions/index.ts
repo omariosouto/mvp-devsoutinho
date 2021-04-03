@@ -14,11 +14,23 @@ const resolvers = {
   Query: {
     async contributions(): Promise<Contribution[]> {
       console.error('LOGGING STUFF HERE BRO');
-      fs.readdir(path.resolve('./'), (err, files) => {
+      console.error('[back folder]');
+      fs.readdir(path.resolve('../'), (err, files) => {
         files.forEach((file) => {
           console.error(file);
         });
       });
+      console.error('[.next folder]');
+      fs.readdir(path.resolve('./.next'), (err, files) => {
+        files.forEach((file) => {
+          console.error(file);
+        });
+      });
+      // fs.readdir(path.resolve('./'), (err, files) => {
+      //   files.forEach((file) => {
+      //     console.error(file);
+      //   });
+      // });
       return new Promise((resolve, reject) =>
         getDbConnection().contributions.find({}, (err, data) => {
           if (err) reject(err);
