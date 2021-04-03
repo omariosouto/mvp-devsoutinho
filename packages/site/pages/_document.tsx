@@ -7,6 +7,7 @@ import Document, {
   DocumentContext,
 } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
+import gtag from '../src/infra/gtag';
 
 export default class MyDocument extends Document {
   static async getInitialProps(
@@ -56,6 +57,21 @@ export default class MyDocument extends Document {
             ></iframe>
           </noscript>
           {/* <!-- End Google Tag Manager (noscript) --> */}
+          {/* Google Analytics */}
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+
+                    gtag('config', '${gtag.GA_TRACKING_ID}', {
+                      page_path: window.location.pathname,
+                    });
+                  `,
+            }}
+          />
+          {/* End Google Analytics */}
           <Main />
           <NextScript />
         </body>

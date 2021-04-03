@@ -6,6 +6,11 @@ import { ApolloProvider } from '@apollo/client';
 import { useApollo } from '../cms/infra/graphql/client';
 import UIProvider from '@devsoutinho/ui/src/theme/UIProvider';
 import GlobalStyle from '@devsoutinho/ui/src/theme/GlobalStyle';
+import Router from 'next/router';
+
+import gtag from '../src/infra/gtag';
+
+Router.events.on('routeChangeComplete', (url) => gtag.pageview(url));
 
 const ToggleWrapper = styled.label`
   z-index: 100;
