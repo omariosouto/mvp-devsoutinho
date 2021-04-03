@@ -26,6 +26,18 @@ const resolvers = {
           console.error(file);
         });
       });
+      console.error('[.next/site folder]');
+      fs.readdir(path.resolve('./.next/site'), (err, files) => {
+        files.forEach((file) => {
+          console.error(file);
+        });
+      });
+      console.error('[.next/server folder]');
+      fs.readdir(path.resolve('./.next/server'), (err, files) => {
+        files.forEach((file) => {
+          console.error(file);
+        });
+      });
       // fs.readdir(path.resolve('./'), (err, files) => {
       //   files.forEach((file) => {
       //     console.error(file);
