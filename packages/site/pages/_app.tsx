@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import { parseCookies, setCookie } from 'nookies';
 import styled from 'styled-components';
 import { ApolloProvider } from '@apollo/client';
@@ -99,7 +100,7 @@ export default function App({
 
   return (
     <ApolloProvider client={apolloClient}>
-      <head>
+      <Head>
         {/* <!-- Google Tag Manager --> */}
         <script
           dangerouslySetInnerHTML={{
@@ -111,7 +112,7 @@ export default function App({
           }}
         />
         {/* <!-- End Google Tag Manager --> */}
-      </head>
+      </Head>
       <UIProvider theme={currentTheme}>
         <GlobalStyle />
         <ToggleTheme theme={currentTheme} toggleTheme={toggleTheme} />
