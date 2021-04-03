@@ -8,7 +8,7 @@ export interface Contribution {
   date: string;
   url: string;
   description: string;
-  image: string;
+  image?: string;
   // tags
   // category
 }

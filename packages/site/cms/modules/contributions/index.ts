@@ -7,46 +7,13 @@ import {
   QueryContributionInput,
   typeDefs,
 } from './type';
-import fs from 'fs';
-import path from 'path';
 
 const resolvers = {
   Query: {
     async contributions(): Promise<Contribution[]> {
-      console.error('LOGGING STUFF HERE BRO');
-      console.error('[back folder]');
-      fs.readdir(path.resolve('../'), (err, files) => {
-        files.forEach((file) => {
-          console.error(file);
-        });
-      });
-      console.error('[.next folder]');
-      fs.readdir(path.resolve('./.next'), (err, files) => {
-        files.forEach((file) => {
-          console.error(file);
-        });
-      });
-      console.error('[.next/site folder]');
-      fs.readdir(path.resolve('./.next/site'), (err, files) => {
-        files &&
-          files.forEach((file) => {
-            console.error(file);
-          });
-      });
-      console.error('[.next/server folder]');
-      fs.readdir(path.resolve('./.next/server'), (err, files) => {
-        files &&
-          files.forEach((file) => {
-            console.error(file);
-          });
-      });
-      // fs.readdir(path.resolve('./'), (err, files) => {
-      //   files.forEach((file) => {
-      //     console.error(file);
-      //   });
-      // });
+      const conn = await getDbConnection();
       return new Promise((resolve, reject) =>
-        getDbConnection().contributions.find({}, (err, data) => {
+        conn.contributions.find({}, (err, data) => {
           if (err) reject(err);
           resolve(data);
         })
@@ -56,8 +23,9 @@ const resolvers = {
       _: unknown,
       { input }: { input: QueryContributionInput }
     ): Promise<Contribution> {
+      const conn = await getDbConnection();
       return new Promise((resolve, reject) =>
-        getDbConnection().contributions.findOne(
+        conn.contributions.findOne(
           {
             ...input,
           },
@@ -74,6 +42,7 @@ const resolvers = {
       _: unknown,
       { input }: { input: NewContributionInput }
     ): Promise<Contribution> {
+      const conn = await getDbConnection();
       const contribution: Contribution = {
         ...input,
         _id: idGenerator(),
@@ -81,7 +50,7 @@ const resolvers = {
       };
 
       return new Promise((resolve, reject) =>
-        getDbConnection().contributions.insert(contribution, (err, data) => {
+        conn.contributions.insert(contribution, (err, data) => {
           if (err) reject(err);
           resolve(data);
         })
