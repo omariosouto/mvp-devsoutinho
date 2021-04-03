@@ -44,15 +44,31 @@ export default function LojinhaScreen(): JSX.Element {
                 longo dos últimos anos, por hora ta WIP, mas vai sair ⚠️
               `}
             </Text>
+            <Text as="p">
+              Aproveita que ta aqui e{' '}
+              <Link href="/api/graphql/">
+                da uma olhada na API GraphQL do site
+              </Link>{' '}
+              😍
+            </Text>
           </div>
         </header>
 
         <ul className="blocks-container">
-          {data.contributions.map(({ url, name }) => (
+          {data.contributions.map(({ url, title, description, date }) => (
             <li key={url}>
               <article>
                 <Link href={url}>
-                  <h1>{name}!</h1>
+                  <time dateTime={date}>
+                    {new Intl.DateTimeFormat('pt-BR', {
+                      month: 'long',
+                      day: 'numeric',
+                      year: 'numeric',
+                    }).format(new Date(date))}
+                  </time>
+                  <h1>{title}</h1>
+
+                  <p>{description}</p>
                 </Link>
               </article>
             </li>

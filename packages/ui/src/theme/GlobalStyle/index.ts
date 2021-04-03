@@ -96,6 +96,15 @@ const GlobalStyle = createGlobalStyle`
       @media (max-width: 600px) {
         grid-template-columns: repeat(1, 1fr);
       }
+      time {
+        font-size: 0.9rem;
+      }
+      h1 {
+        margin-top: 0;
+      }
+      p {
+        margin: 0;
+      }
       li {
         display: flex;
         height: 100%;

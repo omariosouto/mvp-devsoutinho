@@ -3,7 +3,6 @@ import { Contribution } from '../../modules/contributions/type';
 
 interface DevSoutinhoDatabase {
   contributions: Datastore<Contribution>;
-  // store: any;
 }
 
 export function getDbConnection(): DevSoutinhoDatabase {
@@ -11,6 +10,8 @@ export function getDbConnection(): DevSoutinhoDatabase {
     filename: '_data/contributions.db',
     autoload: true,
   });
+  contributions.ensureIndex({ fieldName: 'url', unique: true });
+
   const db: DevSoutinhoDatabase = {
     contributions,
   };

@@ -1,31 +1,11 @@
-import { gql } from 'apollo-server-micro';
 import { getDbConnection } from '../../infra/db/dbFactory';
-import { Contribution } from './type';
-
-interface ContributionInput {
-  name: string;
-}
-
-const typeDefs = gql`
-  type Contribution {
-    _id: String
-    lang: String
-    url: String!
-    date: String!
-    name: String!
-    slug: String!
-    description: String
-  }
-  input ContributionInput {
-    _id: String
-    name: String
-  }
-
-  extend type Query {
-    contributions(input: ContributionInput): [Contribution]!
-    contribution(input: ContributionInput): Contribution
-  }
-`;
+import { idGenerator } from '../../infra/db/idGenerator';
+import {
+  Contribution,
+  NewContributionInput,
+  QueryContributionInput,
+  typeDefs,
+} from './type';
 
 const resolvers = {
   Query: {
@@ -39,7 +19,7 @@ const resolvers = {
     },
     async contribution(
       _: unknown,
-      { input }: { input: ContributionInput }
+      { input }: { input: QueryContributionInput }
     ): Promise<Contribution> {
       return new Promise((resolve, reject) =>
         getDbConnection().contributions.findOne(
@@ -51,6 +31,25 @@ const resolvers = {
             resolve(data);
           }
         )
+      );
+    },
+  },
+  Mutation: {
+    async createContribution(
+      _: unknown,
+      { input }: { input: NewContributionInput }
+    ): Promise<Contribution> {
+      const contribution: Contribution = {
+        ...input,
+        _id: idGenerator(),
+        date: new Date(input.date).toISOString(),
+      };
+
+      return new Promise((resolve, reject) =>
+        getDbConnection().contributions.insert(contribution, (err, data) => {
+          if (err) reject(err);
+          resolve(data);
+        })
       );
     },
   },

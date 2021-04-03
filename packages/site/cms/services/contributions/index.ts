@@ -1,18 +1,29 @@
 import { useQuery, gql, QueryResult, OperationVariables } from '@apollo/client';
 import { initializeApollo } from '../../infra/graphql/client';
 import { withApolloCache } from '../../infra/apollo/withApolloCache';
+import { Contribution } from '../../modules/contributions/type';
+
+type QueryContribution = Pick<
+  Contribution,
+  'title' | 'url' | 'description' | 'date'
+>;
 
 const query = gql`
   query {
     contributions {
-      name
+      title
       url
+      description
+      date
     }
   }
 `;
 
 interface Service {
-  useClient: () => QueryResult<any, OperationVariables>;
+  useClient: () => QueryResult<
+    { contributions: QueryContribution[] },
+    OperationVariables
+  >;
   useServer(): Promise<any>;
 }
 
