@@ -1,4 +1,5 @@
 import Datastore from 'nedb';
+import path from 'path';
 import { Contribution } from '../../modules/contributions/type';
 
 interface DevSoutinhoDatabase {
@@ -7,7 +8,7 @@ interface DevSoutinhoDatabase {
 
 export function getDbConnection(): DevSoutinhoDatabase {
   const contributions = new Datastore<Contribution>({
-    filename: '_data/contributions.db',
+    filename: path.resolve('./', '_data', 'contributions.db'),
     autoload: true,
   });
   contributions.ensureIndex({ fieldName: 'url', unique: true });
