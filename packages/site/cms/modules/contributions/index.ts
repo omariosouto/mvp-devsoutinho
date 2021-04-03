@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { getDbConnection } from '../../infra/db/dbFactory';
 import { idGenerator } from '../../infra/db/idGenerator';
 import {
@@ -6,12 +7,20 @@ import {
   QueryContributionInput,
   typeDefs,
 } from './type';
+import fs from 'fs';
+import path from 'path';
 
 const resolvers = {
   Query: {
     async contributions(): Promise<Contribution[]> {
       return new Promise((resolve, reject) =>
         getDbConnection().contributions.find({}, (err, data) => {
+          console.log('LOGGING STUFF HERE BRO');
+          fs.readdir(path.resolve('./'), (err, files) => {
+            files.forEach((file) => {
+              console.log(file);
+            });
+          });
           if (err) reject(err);
           resolve(data);
         })
