@@ -13,14 +13,14 @@ import path from 'path';
 const resolvers = {
   Query: {
     async contributions(): Promise<Contribution[]> {
+      console.error('LOGGING STUFF HERE BRO');
+      fs.readdir(path.resolve('./'), (err, files) => {
+        files.forEach((file) => {
+          console.error(file);
+        });
+      });
       return new Promise((resolve, reject) =>
         getDbConnection().contributions.find({}, (err, data) => {
-          console.log('LOGGING STUFF HERE BRO');
-          fs.readdir(path.resolve('./'), (err, files) => {
-            files.forEach((file) => {
-              console.log(file);
-            });
-          });
           if (err) reject(err);
           resolve(data);
         })
