@@ -14,23 +14,24 @@ const query = gql`
       title
       url
       description
+      dataFormated: date(input: { format: "dd-MM-YY" })
       date
     }
   }
 `;
 
 interface Service {
-  useClient: () => QueryResult<
+  useHook: () => QueryResult<
     { contributions: QueryContribution[] },
     OperationVariables
   >;
-  useServer(): Promise<any>;
+  get(): Promise<any>;
 }
 
-export function cmsContributionsService(): Service {
+export function cmsContributionsService(): Service { // Service<Client, Server>
   return {
-    useClient: () => useQuery(query),
-    async useServer() {
+    useHook: () => useQuery(query),
+    async getApolloCache() {
       const apolloClient = initializeApollo();
       return {
         apolloClient,
@@ -42,3 +43,4 @@ export function cmsContributionsService(): Service {
     },
   };
 }
+// - exportar 2 funções: client e server
