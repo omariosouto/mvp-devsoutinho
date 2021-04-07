@@ -8,8 +8,6 @@ interface CMSContributionsRepository {
   getContributionsPageData: () => RespositoryMethod<ContributionsPageQuery>;
 }
 
-export const cmsContributionsRepository = (): CMSContributionsRepository => {
-  return {
-    getContributionsPageData,
-  };
-};
+export const cmsContributionsRepository = (): CMSContributionsRepository => ({
+  getContributionsPageData,
+});
