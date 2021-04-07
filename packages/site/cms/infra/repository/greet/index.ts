@@ -1,7 +1,7 @@
 import { useQuery, gql } from '@apollo/client';
-import { initializeApollo } from '../../infra/graphql/client';
+import { initializeApollo } from '../../graphql/client';
 
-import { withApolloCache } from '../../infra/apollo/withApolloCache';
+import { withApolloCache } from '../../apollo/withApolloCache';
 
 const sampleQuery = gql`
   query {
