@@ -2,10 +2,12 @@ import React from 'react';
 import Head from 'next/head';
 import Text from '@devsoutinho/ui/src/components/foundation/Text';
 import Link from '../../src/components/commons/Link';
-import { cmsContributionsService } from '../../cms/services/contributions';
+import { cmsContributionsRepository } from '../../cms/infra/repository/contributions';
+
+const contributionsRepository = cmsContributionsRepository();
 
 export default function LojinhaScreen(): JSX.Element {
-  const { data } = cmsContributionsService().useClient();
+  const { data } = contributionsRepository.getContributionsPageData().useHook();
 
   return (
     <main>
@@ -55,7 +57,7 @@ export default function LojinhaScreen(): JSX.Element {
         </header>
 
         <ul className="blocks-container">
-          {data.contributions.map(({ url, title, description, date }) => (
+          {data?.contributions.map(({ url, title, description, date }) => (
             <li key={url}>
               <article>
                 <Link href={url}>
@@ -80,7 +82,9 @@ export default function LojinhaScreen(): JSX.Element {
 }
 
 export async function getStaticProps(): Promise<{ props: any }> {
-  const { apolloCache } = await cmsContributionsService().useServer();
+  const apolloCache = await contributionsRepository
+    .getContributionsPageData()
+    .getApolloCacheForNextProps();
 
   return {
     props: {
