@@ -6,7 +6,7 @@ import { cmsContributionsRepository } from '../../cms/infra/repository/contribut
 
 const contributionsRepository = cmsContributionsRepository();
 
-export default function LojinhaScreen(): JSX.Element {
+export default function ContributionsScreen(): JSX.Element {
   const { data } = contributionsRepository.getContributionsPageData().useHook();
 
   return (
