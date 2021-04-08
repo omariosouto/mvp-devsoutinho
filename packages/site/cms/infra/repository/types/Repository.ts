@@ -10,9 +10,6 @@ interface ApolloCacheOnServerProps {
 }
 
 export interface RespositoryMethod<ReturnValue> {
-  useHook: () => QueryResult<
-    { contributions: ReturnValue[] },
-    OperationVariables
-  >;
+  useHook: () => QueryResult<ReturnValue, OperationVariables>;
   getApolloCacheForNextProps(): Promise<ApolloCacheOnServerProps>;
 }

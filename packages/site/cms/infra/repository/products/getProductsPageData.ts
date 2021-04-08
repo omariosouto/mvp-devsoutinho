@@ -1,25 +1,26 @@
 import { useQuery, gql } from '@apollo/client';
-import { Contribution } from '../../../modules/contributions/type';
+import { Product } from '../../../modules/products/type';
 import { RespositoryMethod } from '../types/Repository';
 import { initializeApollo } from '../../graphql/client';
 import { withApolloCache } from '../../apollo/withApolloCache';
 
-export type ContributionsPageQuery = Pick<
-  Contribution,
-  'title' | 'url' | 'description' | 'date'
+export type ProductsPageQuery = Pick<
+  Product,
+  'title' | 'url' | 'description' | 'date' | 'image'
 >;
 
-export interface ContributionsPageQueryResult {
-  contributions: ContributionsPageQuery;
+export interface ProductsPageQueryResult {
+  products: ProductsPageQuery[];
 }
 
-export function getContributionsPageData(): RespositoryMethod<ContributionsPageQueryResult> {
+export function getStorePageData(): RespositoryMethod<ProductsPageQueryResult> {
   const query = gql`
     query {
-      contributions {
+      products {
         title
         url
         description
+        image
         date
       }
     }

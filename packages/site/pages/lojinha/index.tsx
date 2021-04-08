@@ -2,17 +2,13 @@ import React from 'react';
 import Head from 'next/head';
 import Text from '@devsoutinho/ui/src/components/foundation/Text';
 import Link from '../../src/components/commons/Link';
+import { cmsProductsRepository } from '../../cms/infra/repository/products';
 
-const links = [
-  {
-    description:
-      'Tenho pela casa toda, inclusive no banheiro!!! ashuasshua vale a pena comprar pra começar seu projeto de automação residêncial, ou só para ouvir as notícias no banheiro mesmo',
-    text: 'Echo Dot (3ª Geração): Smart Speaker com Alexa - Cor Preta',
-    url: 'https://amzn.to/31EevzT',
-  },
-];
+const contributionsRepository = cmsProductsRepository();
 
-export default function LojinhaScreen(): JSX.Element {
+export default function StoreScreen(): JSX.Element {
+  const { data } = contributionsRepository.getStorePageData().useHook();
+
   return (
     <main>
       <Head>
@@ -55,11 +51,11 @@ export default function LojinhaScreen(): JSX.Element {
         </header>
 
         <ul className="blocks-container">
-          {links.map(({ url, description, text }) => (
+          {data.products.map(({ url, description, title }) => (
             <li key={url}>
               <article>
                 <Link href={url}>
-                  <h1>{text}</h1>
+                  <h1>{title}</h1>
                   <p>{description}</p>
                 </Link>
               </article>
@@ -69,4 +65,16 @@ export default function LojinhaScreen(): JSX.Element {
       </div>
     </main>
   );
+}
+
+export async function getStaticProps(): Promise<{ props: any }> {
+  const apolloCache = await contributionsRepository
+    .getStorePageData()
+    .getApolloCacheForNextProps();
+
+  return {
+    props: {
+      ...apolloCache,
+    },
+  };
 }

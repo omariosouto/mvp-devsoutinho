@@ -1,11 +1,11 @@
 import { RespositoryMethod } from '../types/Repository';
 import {
   getContributionsPageData,
-  ContributionsPageQuery,
+  ContributionsPageQueryResult,
 } from './getContributionsPageData';
 
 interface CMSContributionsRepository {
-  getContributionsPageData: () => RespositoryMethod<ContributionsPageQuery>;
+  getContributionsPageData: () => RespositoryMethod<ContributionsPageQueryResult>;
 }
 
 export const cmsContributionsRepository = (): CMSContributionsRepository => ({
