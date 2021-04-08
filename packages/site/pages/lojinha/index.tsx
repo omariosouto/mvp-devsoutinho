@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React from 'react';
 import Head from 'next/head';
 import Text from '@devsoutinho/ui/src/components/foundation/Text';
@@ -10,9 +9,6 @@ const UPDATE_PRODUCT_MUTATION = gql`
   mutation($queryId: String, $newTitle: String) {
     updateProduct(query: { _id: $queryId }, input: { title: $newTitle }) {
       _id
-      title
-      description
-      url
     }
   }
 `;
@@ -28,13 +24,10 @@ export default function StoreScreen(): JSX.Element | string {
     loading,
     error,
   } = productsRepository.getStorePageData().useHook();
-  // TODO: Fix this any and move it to a repository
   const [updateProductTitle] = useMutation(UPDATE_PRODUCT_MUTATION, {
-    // This code is usefull if you want to delete or change order! By default, the state is being sync, you can also give optmistic UI updates
-    // https://www.apollographql.com/docs/react/performance/optimistic-ui/
-    /*
     update(cache, { data }) {
       const updatedProduct = data?.updateProduct;
+
       const currentProducts = cache.readQuery({
         query: productsRepository.getStorePageData().query,
       }) as any;
@@ -43,11 +36,12 @@ export default function StoreScreen(): JSX.Element | string {
         query: productsRepository.getStorePageData().query,
         data: {
           products: currentProducts.products.map((product) => {
-            console.log(updatedProduct, product._id === updatedProduct._id);
             if (product._id === updatedProduct._id) {
               return {
                 ...product,
-                updatedProduct,
+                ...updatedProduct,
+                // If there's no title returned in updatedProduct,
+                title: title,
               };
             }
             return product;
@@ -55,7 +49,6 @@ export default function StoreScreen(): JSX.Element | string {
         },
       });
     },
-    */
   });
 
   if (loading) return 'Carregando... :O';
