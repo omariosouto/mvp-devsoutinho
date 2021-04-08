@@ -17,6 +17,7 @@ export function getStorePageData(): RespositoryMethod<ProductsPageQueryResult> {
   const query = gql`
     query {
       products {
+        _id
         title
         url
         description

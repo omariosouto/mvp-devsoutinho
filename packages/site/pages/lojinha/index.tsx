@@ -41,7 +41,7 @@ export default function StoreScreen(): JSX.Element | string {
         query: contributionsRepository.getStorePageData().query,
         data: {
           products: currentProducts.products.map((product) => {
-            console.log(updatedProduct);
+            console.log(updatedProduct, product._id === updatedProduct._id);
             if (product._id === updatedProduct._id) {
               return {
                 ...product,
