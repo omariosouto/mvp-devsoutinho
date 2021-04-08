@@ -1,7 +1,13 @@
 /* eslint-disable no-console */
 import { getDbConnection } from '../../infra/db/dbFactory';
 import { idGenerator } from '../../infra/db/idGenerator';
-import { Product, NewProductInput, QueryProductInput, typeDefs } from './type';
+import {
+  Product,
+  CreateProductInput,
+  QueryProductInput,
+  typeDefs,
+  UpdateProductInput,
+} from './type';
 
 const resolvers = {
   Query: {
@@ -35,7 +41,7 @@ const resolvers = {
   Mutation: {
     async createProduct(
       _: unknown,
-      { input }: { input: NewProductInput }
+      { input }: { input: CreateProductInput }
     ): Promise<Product> {
       const conn = await getDbConnection();
       const registrationDate = input.date ? new Date(input.date) : new Date();
@@ -50,6 +56,28 @@ const resolvers = {
           if (err) reject(err);
           resolve(data);
         })
+      );
+    },
+    async updateProduct(
+      _: unknown,
+      { input, query }: { query: QueryProductInput; input: UpdateProductInput }
+    ): Promise<Product> {
+      const conn = await getDbConnection();
+
+      return new Promise((resolve, reject) =>
+        conn.products.update(
+          query,
+          { $set: input },
+          { returnUpdatedDocs: true },
+          (err, numAffected, affectedDocuments, _) => {
+            if (err) reject(err);
+            if (numAffected === 0)
+              reject(new Error(`No data changed for id: "${query._id}"`));
+
+            console.log(affectedDocuments);
+            resolve(affectedDocuments);
+          }
+        )
       );
     },
   },

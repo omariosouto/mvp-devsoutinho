@@ -1,19 +1,82 @@
+/* eslint-disable no-console */
 import React from 'react';
 import Head from 'next/head';
 import Text from '@devsoutinho/ui/src/components/foundation/Text';
 import Link from '../../src/components/commons/Link';
+import { useMutation, gql } from '@apollo/client';
 import { cmsProductsRepository } from '../../cms/infra/repository/products';
+
+const UPDATE_PRODUCT_MUTATION = gql`
+  mutation($queryId: String, $newTitle: String) {
+    updateProduct(query: { _id: $queryId }, input: { title: $newTitle }) {
+      _id
+      title
+      description
+      url
+    }
+  }
+`;
 
 const contributionsRepository = cmsProductsRepository();
 
-export default function StoreScreen(): JSX.Element {
-  const { data } = contributionsRepository.getStorePageData().useHook();
+export default function StoreScreen(): JSX.Element | string {
+  const {
+    data,
+    loading,
+    error,
+  } = contributionsRepository.getStorePageData().useHook();
+  const [updateProductTitle] = useMutation(UPDATE_PRODUCT_MUTATION, {
+    update(cache, { data }) {
+      const updatedProduct = data?.updateProduct;
+
+      // TODO: Fix this any and move it to a repository
+      const currentProducts = cache.readQuery({
+        query: contributionsRepository.getStorePageData().query,
+      }) as any;
+
+      cache.writeQuery({
+        query: contributionsRepository.getStorePageData().query,
+        data: {
+          products: currentProducts.products.map((product) => {
+            console.log(updatedProduct);
+            if (product._id === updatedProduct._id) {
+              return {
+                ...product,
+                updatedProduct,
+              };
+            }
+            return product;
+          }),
+        },
+      });
+    },
+  });
+
+  if (loading) return 'Carregando... :O';
+  if (error) return 'Algum erro aconteceu :(';
+  if (!data) return 'Sem dados :(';
 
   return (
     <main>
       <Head>
         <title>🛒 Lojinha | Mario Souto / DevSoutinho</title>
       </Head>
+
+      {process.env.NODE_ENV === 'development' && (
+        <button
+          onClick={() => {
+            console.log('Hellooo!');
+            updateProductTitle({
+              variables: {
+                queryId: '124d97b3-d978-412e-8f33-5cd23b281ac2',
+                newTitle: 'Keychron Toda loja com 10% de desconto!',
+              },
+            });
+          }}
+        >
+          Update Title
+        </button>
+      )}
 
       <div className="container">
         <header className="headerCard">

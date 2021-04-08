@@ -26,6 +26,7 @@ export function getStorePageData(): RespositoryMethod<ProductsPageQueryResult> {
     }
   `;
   return {
+    query,
     useHook: () => useQuery(query),
     async getApolloCacheForNextProps() {
       const apolloClient = initializeApollo();

@@ -3,6 +3,7 @@ import {
   OperationVariables,
   ApolloCache,
   InMemoryCache,
+  DocumentNode,
 } from '@apollo/client';
 
 interface ApolloCacheOnServerProps {
@@ -10,6 +11,7 @@ interface ApolloCacheOnServerProps {
 }
 
 export interface RespositoryMethod<ReturnValue> {
+  query: DocumentNode;
   useHook: () => QueryResult<ReturnValue, OperationVariables>;
   getApolloCacheForNextProps(): Promise<ApolloCacheOnServerProps>;
 }

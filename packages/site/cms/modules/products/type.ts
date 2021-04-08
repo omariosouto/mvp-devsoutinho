@@ -17,7 +17,9 @@ export interface Product {
 
 export type QueryProductInput = Pick<Product, '_id' | 'title'>;
 
-export type NewProductInput = Omit<Product, '_id'>;
+export type CreateProductInput = Omit<Product, '_id'>;
+
+export type UpdateProductInput = Omit<Product, '_id'>;
 
 export const typeDefs = gql`
   type Product {
@@ -30,12 +32,21 @@ export const typeDefs = gql`
     image: String
   }
 
-  input NewProductInput {
+  input CreateProductInput {
     lang: ContentLocale!
     title: String!
     date: String
     url: String!
     description: String!
+    image: String
+  }
+
+  input UpdateProductInput {
+    lang: ContentLocale
+    title: String
+    date: String
+    url: String
+    description: String
     image: String
   }
 
@@ -48,6 +59,7 @@ export const typeDefs = gql`
     product(input: QueryProductInput): Product
   }
   extend type Mutation {
-    createProduct(input: NewProductInput): Product
+    createProduct(input: CreateProductInput): Product
+    updateProduct(input: UpdateProductInput, query: QueryProductInput): Product
   }
 `;
