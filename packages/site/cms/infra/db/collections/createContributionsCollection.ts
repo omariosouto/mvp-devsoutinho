@@ -8,7 +8,8 @@ export function createContributionsCollection(): Datastore<Contribution> {
   const contributions = new Datastore<Contribution>(
     createConfig(path.resolve('./', '_data', 'contributions.db'))
   );
-  if (IS_PROD)
+
+  if (IS_PROD || (contributions as any).inMemoryOnly)
     contributions.insert((allContributions as unknown) as Contribution[]);
 
   contributions.ensureIndex({ fieldName: 'url', unique: true });
