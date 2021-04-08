@@ -8,7 +8,8 @@ export function createProductsCollection(): Datastore<Product> {
   const products = new Datastore<Product>(
     createConfig(path.resolve('./', '_data', 'products.db'))
   );
-  if (IS_PROD) products.insert((allProducts as unknown) as Product[]);
+  if (IS_PROD || (products as any).inMemoryOnly)
+    products.insert((allProducts as unknown) as Product[]);
 
   products.ensureIndex({ fieldName: 'url', unique: true });
 
