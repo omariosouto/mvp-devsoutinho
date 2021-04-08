@@ -25,6 +25,7 @@ export function getContributionsPageData(): RespositoryMethod<ContributionsPageQ
     }
   `;
   return {
+    query,
     useHook: () => useQuery(query),
     async getApolloCacheForNextProps() {
       const apolloClient = initializeApollo();

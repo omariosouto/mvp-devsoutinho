@@ -73,8 +73,6 @@ const resolvers = {
             if (err) reject(err);
             if (numAffected === 0)
               reject(new Error(`No data changed for id: "${query._id}"`));
-
-            console.log(affectedDocuments);
             resolve(affectedDocuments);
           }
         )

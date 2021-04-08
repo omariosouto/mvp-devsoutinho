@@ -32,5 +32,9 @@ export function createConfig(dbFilePath: string) {
     ...base,
     filename: dbFilePath,
     autoload: true,
+    // inMemoryOnly: true,
+    // onload: () => {
+    //   console.log('Load');
+    // },
   };
 }

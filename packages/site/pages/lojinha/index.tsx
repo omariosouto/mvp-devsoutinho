@@ -20,6 +20,9 @@ const UPDATE_PRODUCT_MUTATION = gql`
 const contributionsRepository = cmsProductsRepository();
 
 export default function StoreScreen(): JSX.Element | string {
+  const [title, setTitle] = React.useState(
+    'Keychron Toda loja com 10% de desconto!'
+  );
   const {
     data,
     loading,
@@ -63,19 +66,26 @@ export default function StoreScreen(): JSX.Element | string {
       </Head>
 
       {process.env.NODE_ENV === 'development' && (
-        <button
-          onClick={() => {
-            console.log('Hellooo!');
-            updateProductTitle({
-              variables: {
-                queryId: '124d97b3-d978-412e-8f33-5cd23b281ac2',
-                newTitle: 'Keychron Toda loja com 10% de desconto!',
-              },
-            });
-          }}
-        >
-          Update Title
-        </button>
+        <div>
+          <input
+            type="text"
+            value={title}
+            onChange={(event) => setTitle(event.target.value)}
+          />
+          <button
+            onClick={() => {
+              console.log('Hellooo!');
+              updateProductTitle({
+                variables: {
+                  queryId: '124d97b3-d978-412e-8f33-5cd23b281ac2',
+                  newTitle: title,
+                },
+              });
+            }}
+          >
+            Update Title
+          </button>
+        </div>
       )}
 
       <div className="container">

@@ -8,12 +8,11 @@ interface DevSoutinhoDatabase {
   contributions: Datastore<Contribution>;
   products: Datastore<Product>;
 }
+const db: DevSoutinhoDatabase = {
+  contributions: createContributionsCollection(),
+  products: createProductsCollection(),
+};
 
 export async function getDbConnection(): Promise<DevSoutinhoDatabase> {
-  const db = {
-    contributions: createContributionsCollection(),
-    products: createProductsCollection(),
-  };
-
   return db;
 }

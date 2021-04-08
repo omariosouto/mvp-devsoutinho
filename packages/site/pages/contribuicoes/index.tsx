@@ -57,24 +57,27 @@ export default function ContributionsScreen(): JSX.Element {
         </header>
 
         <ul className="blocks-container">
-          {data?.contributions.map(({ url, title, description, date }) => (
-            <li key={url}>
-              <article>
-                <Link href={url}>
-                  <time dateTime={date}>
-                    {new Intl.DateTimeFormat('pt-BR', {
-                      month: 'long',
-                      day: 'numeric',
-                      year: 'numeric',
-                    }).format(new Date(date))}
-                  </time>
-                  <h1>{title}</h1>
+          {/* TODO: Remove this any */}
+          {(data as any)?.contributions.map(
+            ({ url, title, description, date }) => (
+              <li key={url}>
+                <article>
+                  <Link href={url}>
+                    <time dateTime={date}>
+                      {new Intl.DateTimeFormat('pt-BR', {
+                        month: 'long',
+                        day: 'numeric',
+                        year: 'numeric',
+                      }).format(new Date(date))}
+                    </time>
+                    <h1>{title}</h1>
 
-                  <p>{description}</p>
-                </Link>
-              </article>
-            </li>
-          ))}
+                    <p>{description}</p>
+                  </Link>
+                </article>
+              </li>
+            )
+          )}
         </ul>
       </div>
     </main>
