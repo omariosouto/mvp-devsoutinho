@@ -17,7 +17,7 @@ const UPDATE_PRODUCT_MUTATION = gql`
   }
 `;
 
-const contributionsRepository = cmsProductsRepository();
+const productsRepository = cmsProductsRepository();
 
 export default function StoreScreen(): JSX.Element | string {
   const [title, setTitle] = React.useState(
@@ -27,18 +27,20 @@ export default function StoreScreen(): JSX.Element | string {
     data,
     loading,
     error,
-  } = contributionsRepository.getStorePageData().useHook();
+  } = productsRepository.getStorePageData().useHook();
+  // TODO: Fix this any and move it to a repository
   const [updateProductTitle] = useMutation(UPDATE_PRODUCT_MUTATION, {
+    // This code is usefull if you want to delete or change order! By default, the state is being sync, you can also give optmistic UI updates
+    // https://www.apollographql.com/docs/react/performance/optimistic-ui/
+    /*
     update(cache, { data }) {
       const updatedProduct = data?.updateProduct;
-
-      // TODO: Fix this any and move it to a repository
       const currentProducts = cache.readQuery({
-        query: contributionsRepository.getStorePageData().query,
+        query: productsRepository.getStorePageData().query,
       }) as any;
 
       cache.writeQuery({
-        query: contributionsRepository.getStorePageData().query,
+        query: productsRepository.getStorePageData().query,
         data: {
           products: currentProducts.products.map((product) => {
             console.log(updatedProduct, product._id === updatedProduct._id);
@@ -53,6 +55,7 @@ export default function StoreScreen(): JSX.Element | string {
         },
       });
     },
+    */
   });
 
   if (loading) return 'Carregando... :O';
@@ -74,7 +77,6 @@ export default function StoreScreen(): JSX.Element | string {
           />
           <button
             onClick={() => {
-              console.log('Hellooo!');
               updateProductTitle({
                 variables: {
                   queryId: '124d97b3-d978-412e-8f33-5cd23b281ac2',
@@ -141,7 +143,7 @@ export default function StoreScreen(): JSX.Element | string {
 }
 
 export async function getStaticProps(): Promise<{ props: any }> {
-  const apolloCache = await contributionsRepository
+  const apolloCache = await productsRepository
     .getStorePageData()
     .getApolloCacheForNextProps();
 
