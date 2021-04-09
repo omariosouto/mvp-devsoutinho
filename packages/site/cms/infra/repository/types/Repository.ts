@@ -4,6 +4,7 @@ import {
   ApolloCache,
   InMemoryCache,
   DocumentNode,
+  MutationTuple,
 } from '@apollo/client';
 
 interface ApolloCacheOnServerProps {
@@ -14,4 +15,9 @@ export interface RespositoryMethod<ReturnValue> {
   query: DocumentNode;
   useHook: () => QueryResult<ReturnValue, OperationVariables>;
   getApolloCacheForNextProps(): Promise<ApolloCacheOnServerProps>;
+}
+
+export interface RespositoryMutationMethod<ReturnValue, MutationVariables> {
+  query: DocumentNode;
+  useHook: () => MutationTuple<ReturnValue, MutationVariables>;
 }

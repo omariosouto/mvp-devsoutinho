@@ -2,16 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import Text from '@devsoutinho/ui/src/components/foundation/Text';
 import Link from '../../src/components/commons/Link';
-import { useMutation, gql } from '@apollo/client';
 import { cmsProductsRepository } from '../../cms/infra/repository/products';
-
-const UPDATE_PRODUCT_MUTATION = gql`
-  mutation($queryId: String, $newTitle: String) {
-    updateProduct(query: { _id: $queryId }, input: { title: $newTitle }) {
-      _id
-    }
-  }
-`;
 
 const productsRepository = cmsProductsRepository();
 
@@ -19,41 +10,24 @@ export default function StoreScreen(): JSX.Element | string {
   const [title, setTitle] = React.useState(
     'Keychron Toda loja com 10% de desconto!'
   );
+
   const {
     data,
     loading,
     error,
-  } = productsRepository.getStorePageData().useHook();
-  const [updateProductTitle] = useMutation(UPDATE_PRODUCT_MUTATION, {
-    update(cache, { data }) {
-      const updatedProduct = data?.updateProduct;
+  } = productsRepository.readStorePageData().useHook();
 
-      const currentProducts = cache.readQuery({
-        query: productsRepository.getStorePageData().query,
-      }) as any;
-
-      cache.writeQuery({
-        query: productsRepository.getStorePageData().query,
-        data: {
-          products: currentProducts.products.map((product) => {
-            if (product._id === updatedProduct._id) {
-              return {
-                ...product,
-                ...updatedProduct,
-                // If there's no title returned in updatedProduct,
-                title: title,
-              };
-            }
-            return product;
-          }),
-        },
-      });
-    },
-  });
+  const [
+    updateProductBy,
+    updateProductStatus,
+  ] = productsRepository.updateProduct().useHook();
 
   if (loading) return 'Carregando... :O';
   if (error) return 'Algum erro aconteceu :(';
   if (!data) return 'Sem dados :(';
+
+  // eslint-disable-next-line no-console
+  console.log('updateProductStatus', updateProductStatus);
 
   return (
     <main>
@@ -70,12 +44,24 @@ export default function StoreScreen(): JSX.Element | string {
           />
           <button
             onClick={() => {
-              updateProductTitle({
+              updateProductBy({
                 variables: {
-                  queryId: '124d97b3-d978-412e-8f33-5cd23b281ac2',
-                  newTitle: title,
+                  query: {
+                    _id: '124d97b3-d978-412e-8f33-5cd23b281ac2',
+                  },
+                  input: {
+                    title,
+                  },
                 },
-              });
+              })
+                .then((result) => {
+                  // eslint-disable-next-line no-console
+                  console.log(result);
+                })
+                .catch((err) => {
+                  // TODO: Trigger error to Sentry-like tool
+                  console.error(err);
+                });
             }}
           >
             Update Title
@@ -137,7 +123,7 @@ export default function StoreScreen(): JSX.Element | string {
 
 export async function getStaticProps(): Promise<{ props: any }> {
   const apolloCache = await productsRepository
-    .getStorePageData()
+    .readStorePageData()
     .getApolloCacheForNextProps();
 
   return {

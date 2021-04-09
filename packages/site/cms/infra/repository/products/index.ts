@@ -1,13 +1,26 @@
-import { RespositoryMethod } from '../types/Repository';
 import {
-  getStorePageData,
+  RespositoryMethod,
+  RespositoryMutationMethod,
+} from '../types/Repository';
+import {
+  readStorePageData,
   ProductsPageQueryResult,
-} from './getProductsPageData';
+} from './readProductsPageData';
+import {
+  UpdateProductMutationResult,
+  UpdateProductVariables,
+  updateProduct,
+} from './updateProduct';
 
 interface CMSProductsRepository {
-  getStorePageData: () => RespositoryMethod<ProductsPageQueryResult>;
+  readStorePageData: () => RespositoryMethod<ProductsPageQueryResult>;
+  updateProduct: () => RespositoryMutationMethod<
+    UpdateProductMutationResult,
+    UpdateProductVariables
+  >;
 }
 
 export const cmsProductsRepository = (): CMSProductsRepository => ({
-  getStorePageData,
+  readStorePageData,
+  updateProduct,
 });

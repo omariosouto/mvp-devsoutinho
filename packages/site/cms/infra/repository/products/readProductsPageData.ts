@@ -13,7 +13,7 @@ export interface ProductsPageQueryResult {
   products: ProductsPageQuery[];
 }
 
-export function getStorePageData(): RespositoryMethod<ProductsPageQueryResult> {
+export function readStorePageData(): RespositoryMethod<ProductsPageQueryResult> {
   const query = gql`
     query {
       products {
