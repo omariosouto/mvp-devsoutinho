@@ -4,7 +4,7 @@ import { RespositoryMutationMethod } from '../types/Repository';
 
 export type UpdateProductMutationResult = Pick<Product, '_id' | 'title'>;
 const UPDATE_PRODUCT_MUTATION = gql`
-  mutation($input: UpdateProductInput) {
+  mutation($query: QueryProductInput, $input: UpdateProductInput) {
     updateProduct(query: $query, input: $input) {
       _id
       title
