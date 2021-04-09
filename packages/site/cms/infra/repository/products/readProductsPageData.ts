@@ -4,28 +4,28 @@ import { RespositoryMethod } from '../types/Repository';
 import { initializeApollo } from '../../graphql/client';
 import { withApolloCache } from '../../apollo/withApolloCache';
 
-export type ProductsPageQuery = Pick<
+export type ReadStorePageQuery = Pick<
   Product,
-  'title' | 'url' | 'description' | 'date' | 'image'
+  '_id' | 'title' | 'url' | 'description' | 'date' | 'image'
 >;
+const query = gql`
+  query {
+    products {
+      _id
+      title
+      url
+      description
+      image
+      date
+    }
+  }
+`;
 
-export interface ProductsPageQueryResult {
-  products: ProductsPageQuery[];
+export interface ReadStorePageQueryResult {
+  products: ReadStorePageQuery[];
 }
 
-export function readStorePageData(): RespositoryMethod<ProductsPageQueryResult> {
-  const query = gql`
-    query {
-      products {
-        _id
-        title
-        url
-        description
-        image
-        date
-      }
-    }
-  `;
+export function readStorePageData(): RespositoryMethod<ReadStorePageQueryResult> {
   return {
     query,
     useHook: () => useQuery(query),

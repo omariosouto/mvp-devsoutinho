@@ -1,26 +1,23 @@
 import { useMutation, gql } from '@apollo/client';
-import { Product } from '../../../modules/products/type';
+import {
+  Product,
+  QueryProductInput,
+  UpdateProductInput,
+} from '../../../modules/products/type';
 import { RespositoryMutationMethod } from '../types/Repository';
 
-export type UpdateProductMutationResult = Pick<Product, '_id' | 'title'>;
+export interface UpdateProductVariables {
+  query: QueryProductInput;
+  input: UpdateProductInput;
+}
+export type UpdateProductMutationResult = Pick<Product, '_id'>;
 const UPDATE_PRODUCT_MUTATION = gql`
   mutation($query: QueryProductInput, $input: UpdateProductInput) {
     updateProduct(query: $query, input: $input) {
       _id
-      title
     }
   }
 `;
-
-// TODO: Mover o CMS para um modulo externo again
-// TODO: Tentar usar as interfaces criadas pro CMS
-type UpdateProductQuery = Pick<Product, '_id'>;
-type UpdateProductInput = Partial<Omit<Product, '_id'>>;
-
-export interface UpdateProductVariables {
-  query: UpdateProductQuery;
-  input: UpdateProductInput;
-}
 
 export function updateProduct(): RespositoryMutationMethod<
   UpdateProductMutationResult,
@@ -28,8 +25,8 @@ export function updateProduct(): RespositoryMutationMethod<
 > {
   return {
     query: UPDATE_PRODUCT_MUTATION,
+    // TODO: Receive functions that update the cache here
     useHook() {
-      // TODO: Create a middleware for this function
       return useMutation(UPDATE_PRODUCT_MUTATION);
     },
   };

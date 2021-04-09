@@ -15,11 +15,11 @@ export interface Product {
   // category: Category[];
 }
 
-export type QueryProductInput = Pick<Product, '_id' | 'title'>;
+export type QueryProductInput = Partial<Pick<Product, '_id' | 'title'>>;
 
 export type CreateProductInput = Omit<Product, '_id'>;
 
-export type UpdateProductInput = Omit<Product, '_id'>;
+export type UpdateProductInput = Partial<Omit<Product, '_id'>>;
 
 export const typeDefs = gql`
   type Product {

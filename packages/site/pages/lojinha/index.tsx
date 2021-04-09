@@ -54,9 +54,9 @@ export default function StoreScreen(): JSX.Element | string {
                   },
                 },
               })
-                .then((result) => {
+                .then(({ data }) => {
                   // eslint-disable-next-line no-console
-                  console.log(result);
+                  console.log(data);
                 })
                 .catch((err) => {
                   // TODO: Trigger error to Sentry-like tool

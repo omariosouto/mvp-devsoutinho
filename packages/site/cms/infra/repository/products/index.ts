@@ -4,7 +4,7 @@ import {
 } from '../types/Repository';
 import {
   readStorePageData,
-  ProductsPageQueryResult,
+  ReadStorePageQueryResult,
 } from './readProductsPageData';
 import {
   UpdateProductMutationResult,
@@ -13,7 +13,7 @@ import {
 } from './updateProduct';
 
 interface CMSProductsRepository {
-  readStorePageData: () => RespositoryMethod<ProductsPageQueryResult>;
+  readStorePageData: () => RespositoryMethod<ReadStorePageQueryResult>;
   updateProduct: () => RespositoryMutationMethod<
     UpdateProductMutationResult,
     UpdateProductVariables
