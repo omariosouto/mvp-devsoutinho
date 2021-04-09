@@ -10,11 +10,13 @@ export interface UpdateProductVariables {
   query: QueryProductInput;
   input: UpdateProductInput;
 }
-export type UpdateProductMutationResult = Pick<Product, '_id'>;
+// TODO: Remove "title" from here, and define strategy to handle cache update
+export type UpdateProductMutationResult = Pick<Product, '_id' | 'title'>;
 const UPDATE_PRODUCT_MUTATION = gql`
   mutation($query: QueryProductInput, $input: UpdateProductInput) {
     updateProduct(query: $query, input: $input) {
       _id
+      title
     }
   }
 `;
