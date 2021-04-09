@@ -116,9 +116,12 @@ export default function App({
           })(window,document,'script','dataLayer','GTM-MH9X8XM');`,
           }}
         />
-        <link rel="preconnect" href="//polyfill.io"/>
-        <link rel="dns-prefetch" href="//polyfill.io"/>
-        <script defer="" src="https://polyfill.io/v3/polyfill.min.js?features=es5,es6,es7&amp;flags=gated">
+        <link rel="preconnect" href="//polyfill.io" />
+        <link rel="dns-prefetch" href="//polyfill.io" />
+        <script
+          defer
+          src="https://polyfill.io/v3/polyfill.min.js?features=es5,es6,es7&amp;flags=gated"
+        />
         {/* <!-- End Google Tag Manager --> */}
       </Head>
       <UIProvider theme={currentTheme}>
