@@ -36,5 +36,9 @@ export function readStorePageData(): RespositoryMethod<ReadStorePageQueryResult>
       });
       return withApolloCache(apolloClient);
     },
+    updateCache(...args) {
+      // eslint-disable-next-line no-console
+      console.log('vrau!', args);
+    },
   };
 }

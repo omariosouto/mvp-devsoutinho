@@ -11,23 +11,13 @@ export default function StoreScreen(): JSX.Element | string {
     'Keychron Toda loja com 10% de desconto!'
   );
 
-  const {
-    data,
-    loading,
-    error,
-  } = productsRepository.readStorePageData().useHook();
+  const { data } = productsRepository.readStorePageData().useHook();
 
-  const [
-    updateProductBy,
-    updateProductStatus,
-  ] = productsRepository.updateProduct().useHook();
+  const [updateProductBy] = productsRepository.updateProduct().useHook();
 
-  if (loading) return 'Carregando... :O';
-  if (error) return 'Algum erro aconteceu :(';
-  if (!data) return 'Sem dados :(';
-
-  // eslint-disable-next-line no-console
-  console.log('updateProductStatus', updateProductStatus);
+  if (data.products.length === 0) {
+    throw new Error(`There's no products to be rendered`);
+  }
 
   return (
     <main>
@@ -44,24 +34,24 @@ export default function StoreScreen(): JSX.Element | string {
           />
           <button
             onClick={() => {
+              const input = {
+                title,
+              };
               updateProductBy({
                 variables: {
                   query: {
                     _id: '124d97b3-d978-412e-8f33-5cd23b281ac2',
                   },
-                  input: {
-                    title,
-                  },
+                  input,
                 },
-              })
-                .then(({ data }) => {
-                  // eslint-disable-next-line no-console
-                  console.log(data);
-                })
-                .catch((err) => {
-                  // TODO: Trigger error to Sentry-like tool
-                  console.error(err);
-                });
+                update: (cache, mutationResult) =>
+                  productsRepository
+                    .readStorePageData()
+                    .updateCache(cache, mutationResult, input),
+              }).catch((err) => {
+                // TODO: Trigger error to Sentry-like tool
+                console.error(err);
+              });
             }}
           >
             Update Title

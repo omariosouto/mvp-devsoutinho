@@ -21,9 +21,13 @@ export type CreateProductInput = Omit<Product, '_id'>;
 
 export type UpdateProductInput = Partial<Omit<Product, '_id'>>;
 
+export interface UpdateProductPayload {
+  product: Partial<Product>;
+}
+
 export const typeDefs = gql`
   type Product {
-    _id: String
+    _id: String!
     lang: ContentLocale
     title: String
     date: String
@@ -49,6 +53,9 @@ export const typeDefs = gql`
     description: String
     image: String
   }
+  type UpdateProductPayload {
+    product: Product
+  }
 
   input QueryProductInput {
     _id: String
@@ -60,6 +67,9 @@ export const typeDefs = gql`
   }
   extend type Mutation {
     createProduct(input: CreateProductInput): Product
-    updateProduct(input: UpdateProductInput, query: QueryProductInput): Product
+    updateProduct(
+      input: UpdateProductInput
+      query: QueryProductInput
+    ): UpdateProductPayload
   }
 `;

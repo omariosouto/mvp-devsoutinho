@@ -7,6 +7,7 @@ import {
   QueryProductInput,
   typeDefs,
   UpdateProductInput,
+  UpdateProductPayload,
 } from './type';
 
 const resolvers = {
@@ -61,7 +62,7 @@ const resolvers = {
     async updateProduct(
       _: unknown,
       { input, query }: { query: QueryProductInput; input: UpdateProductInput }
-    ): Promise<Product> {
+    ): Promise<UpdateProductPayload> {
       const conn = await getDbConnection();
 
       return new Promise((resolve, reject) =>
@@ -73,7 +74,9 @@ const resolvers = {
             if (err) reject(err);
             if (numAffected === 0)
               reject(new Error(`No data changed for id: "${query._id}"`));
-            resolve(affectedDocuments);
+            resolve({
+              product: affectedDocuments,
+            });
           }
         )
       );
