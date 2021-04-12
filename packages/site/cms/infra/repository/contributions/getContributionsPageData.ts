@@ -34,5 +34,8 @@ export function getContributionsPageData(): RespositoryMethod<ContributionsPageQ
       });
       return withApolloCache(apolloClient);
     },
+    updateCache() {
+      console.warn('Implement cache update strategy');
+    },
   };
 }

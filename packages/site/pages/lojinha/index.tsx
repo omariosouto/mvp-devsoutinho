@@ -11,13 +11,20 @@ export default function StoreScreen(): JSX.Element | string {
     'Keychron Toda loja com 10% de desconto!'
   );
 
-  const { data } = productsRepository.readStorePageData().useHook();
+  const {
+    data,
+    loading,
+    error,
+  } = productsRepository.readStorePageData().useHook();
 
   const [updateProductBy] = productsRepository.updateProduct().useHook();
 
-  if (data.products.length === 0) {
-    throw new Error(`There's no products to be rendered`);
-  }
+  // eslint-disable-next-line no-console
+  console.log('data', data);
+
+  if (loading) return 'Loading...';
+  if (error) return 'Loading...';
+  if (!data) return 'No data :(';
 
   return (
     <main>
