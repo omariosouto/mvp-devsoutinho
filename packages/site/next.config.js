@@ -92,6 +92,11 @@ module.exports = withPlugins([withTM], {
     ];
     const redirects = [
       {
+        source: '/flappy-bird-devsoutinho/',
+        destination: 'https://omariosouto.github.io/flappy-bird-devsoutinho',
+        permanent: true,
+      },
+      {
         source: '/go/youtube/',
         destination: 'https://youtube.com/DevSoutinho',
         permanent: true,
