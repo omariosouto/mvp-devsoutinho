@@ -9,7 +9,7 @@ export function gtag(...args: any): void {
 }
 
 const pageview = (url: string): void => {
-  global.gtag({
+  gtag({
     event: 'pageview',
     url,
   });

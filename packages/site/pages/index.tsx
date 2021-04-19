@@ -13,21 +13,27 @@ const links = [
   },
   {
     description:
-      'Espaço pra galera que acompanha o canal conversar, trocar experiências, dicas e muito mais!',
-    text: '🎉 Comunidade: Squad do DevSoutinho',
-    url: '/go/comunidade/',
+      'Receba semanalmente os WeekLinks do DevSoutinho, sempre 7 dicas de coisas que mudaram/fizeram minha semana de alguma forma',
+    text: '📰 Newsletter - WeekLinks DevSoutinho',
+    url: '/newsletter/',
   },
+  // {
+  //   description:
+  //     'Espaço pra galera que acompanha o canal conversar, trocar experiências, dicas e muito mais!',
+  //   text: '🎉 Comunidade: Squad do DevSoutinho',
+  //   url: '/go/comunidade/',
+  // },
   {
     description:
       'Váaarios links de gadgets e "cacarecos" que eu tenho/estou com vontade de comprar e que vira e mexe aparecem nos vídeos',
     text: '🛒 Lojinha',
-    url: '/lojinha',
+    url: '/lojinha/',
   },
   {
     description:
       'Aqui tem uma lista com todas as contribuições que eu fiz desde o meu primeiro post!',
     text: '✨ Log de Contribuições',
-    url: '/contribuicoes',
+    url: '/contribuicoes/',
   },
 ];
 
