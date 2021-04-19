@@ -13,7 +13,7 @@ const links = [
   },
   {
     description:
-      'Receba semanalmente os WeekLinks do DevSoutinho, sempre 7 dicas de coisas que mudaram/fizeram minha semana de alguma forma',
+      'Receba TODA segunda a WeekLinks do DevSoutinho, 2 min de leitura, sempre 7 dicas legais de coisas que mudaram/fizeram minha semana de alguma forma',
     text: '📰 Newsletter - WeekLinks DevSoutinho',
     url: '/newsletter/',
   },
