@@ -1,5 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
+import { GlobalThemeStyle } from '../GlobalStyle';
 import themes from '../themes';
 
 interface UIProviderProps {
@@ -11,7 +12,12 @@ export default function UIProvider({
   theme,
   children,
 }: UIProviderProps): JSX.Element {
-  return <ThemeProvider theme={themes[theme]}>{children}</ThemeProvider>;
+  return (
+    <ThemeProvider theme={themes[theme]}>
+      <GlobalThemeStyle />
+      {children}
+    </ThemeProvider>
+  );
 }
 
 UIProvider.defaultProps = {

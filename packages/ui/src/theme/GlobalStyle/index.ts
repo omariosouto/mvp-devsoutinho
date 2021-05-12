@@ -1,5 +1,24 @@
 import { createGlobalStyle } from 'styled-components';
 
+export const GlobalThemeStyle = createGlobalStyle`
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+
+    /* Font */
+    font-family: -apple-system,BlinkMacSystemFont,sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+`;
+
+// TODO: Kill that file
 const GlobalStyle = createGlobalStyle`
   :root {
     --colors_primary_main_color: ${({ theme }) =>
