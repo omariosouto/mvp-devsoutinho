@@ -35,6 +35,7 @@ const FormWrapper = styled.div`
     }
   }
   button {
+    cursor: pointer;
     font-size: 1.125rem;
     width: 100%;
     border: none;
