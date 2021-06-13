@@ -39,7 +39,6 @@ module.exports = withPlugins([withTM], {
       'hipsters-72-por-tras-do-wordpress',
       'inputs-materializados-com-css',
       'js',
-      'newsletter',
       'o-que-e-wordpress',
       'roteamento-no-react-com-os-poderes-do-react-router-v4',
       'stylus',

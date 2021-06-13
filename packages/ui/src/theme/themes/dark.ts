@@ -15,7 +15,7 @@ const theme: DefaultTheme = {
     primary: {
       main: {
         color: '#ff6a00',
-        contrastColor: 'black',
+        contrastColor: '#333333',
       },
     },
   },

@@ -17,12 +17,6 @@ const links = [
     text: '📰 Newsletter - WeekLinks DevSoutinho',
     url: '/newsletter/',
   },
-  // {
-  //   description:
-  //     'Espaço pra galera que acompanha o canal conversar, trocar experiências, dicas e muito mais!',
-  //   text: '🎉 Comunidade: Squad do DevSoutinho',
-  //   url: '/go/comunidade/',
-  // },
   {
     description:
       'Váaarios links de gadgets e "cacarecos" que eu tenho/estou com vontade de comprar e que vira e mexe aparecem nos vídeos',
@@ -41,7 +35,7 @@ export default function HomeScreen(): JSX.Element {
   return (
     <main>
       <Head>
-        <title>Mario Souto / DevSoutinho</title>
+        <title>Home | Mario Souto - DevSoutinho</title>
       </Head>
 
       <div className="container">
