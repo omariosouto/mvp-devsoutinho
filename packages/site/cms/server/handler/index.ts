@@ -1,6 +1,7 @@
 import { ApolloServer, gql, makeExecutableSchema } from 'apollo-server-micro';
 import contributionsModule from '../../modules/contributions';
 import productsModule from '../../modules/products';
+import youtubeModule from '../../modules/youtube';
 
 const typeDefs = gql`
   enum ContentLocale {
@@ -21,16 +22,23 @@ const typeDefs = gql`
 `;
 
 export const schema = makeExecutableSchema({
-  typeDefs: [productsModule.typeDefs, contributionsModule.typeDefs, typeDefs],
+  typeDefs: [
+    youtubeModule.typeDefs,
+    productsModule.typeDefs,
+    contributionsModule.typeDefs,
+    typeDefs,
+  ],
   resolvers: {
     Query: {
       ...contributionsModule.resolvers.Query,
       ...productsModule.resolvers.Query,
+      ...youtubeModule.resolvers.Query,
       greet: () => 'Welcome to @devsoutinho/cms',
     },
     Mutation: {
       ...contributionsModule.resolvers.Mutation,
       ...productsModule.resolvers.Mutation,
+      ...youtubeModule.resolvers.Mutation,
       createSampleText: (_: unknown, args) => args.input.text,
     },
   },
