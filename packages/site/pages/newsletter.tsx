@@ -4,36 +4,36 @@ import Head from 'next/head';
 import Text from '@devsoutinho/ui/src/components/foundation/Text';
 import Link from '../src/components/commons/Link';
 
+const InputText = styled.input`
+  border: 1px solid var(--colors__background_main_contrastColor);
+  font-size: 1.125rem;
+  width: 100%;
+  outline: 0;
+  padding: 15px;
+  border-radius: 7px;
+  display: block;
+  box-shadow: ${({ theme }) =>
+      `${theme.colors.background.main.contrastColor}25`}
+    0px 2px 10px;
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.1s, background-color 0.1s, box-shadow 0.3s;
+  margin-bottom: 15px;
+  &:hover,
+  &:focus {
+    opacity: 1;
+    border-color: ${({ theme }) => theme.colors.primary.main.color}ba;
+    color: ${({ theme }) => theme.colors.primary.main.color};
+    box-shadow: ${({ theme }) =>
+        `${theme.colors.background.main.contrastColor}20`}
+      0px 2px 10px 5px;
+  }
+`;
+
 const FormWrapper = styled.div`
   margin: 0 auto;
   max-width: 300px;
 
-  .inputField {
-    font-size: 1.125rem;
-    width: 100%;
-    outline: 0;
-    padding: 15px;
-    border-radius: 7px;
-    display: block;
-    border: 1px solid
-      ${({ theme }) => theme.colors.background.main.contrastColor};
-    box-shadow: ${({ theme }) =>
-        `${theme.colors.background.main.contrastColor}25`}
-      0px 2px 10px;
-    color: inherit;
-    text-decoration: none;
-    transition: color 0.1s, background-color 0.1s, box-shadow 0.3s;
-    margin-bottom: 15px;
-    &:hover,
-    &:focus {
-      opacity: 1;
-      border-color: ${({ theme }) => theme.colors.primary.main.color}ba;
-      color: ${({ theme }) => theme.colors.primary.main.color};
-      box-shadow: ${({ theme }) =>
-          `${theme.colors.background.main.contrastColor}20`}
-        0px 2px 10px 5px;
-    }
-  }
   button {
     cursor: pointer;
     font-size: 1.125rem;
@@ -115,7 +115,7 @@ export default function HomeScreen(): JSX.Element {
               noValidate
             >
               <div id="mc_embed_signup_scroll">
-                <input
+                <InputText
                   type="email"
                   name="EMAIL"
                   className="email inputField"

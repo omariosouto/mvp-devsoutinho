@@ -23,6 +23,9 @@ const GlobalStyle = createGlobalStyle`
   :root {
     --colors_primary_main_color: ${({ theme }) =>
       theme.colors.primary.main.color};
+    --colors__background_main_contrastColor: ${({ theme }) =>
+      theme.colors.background.main.contrastColor} 
+      
   }
     * {
       box-sizing: border-box;
