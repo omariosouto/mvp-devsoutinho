@@ -9,6 +9,7 @@ const FormWrapper = styled.div`
   max-width: 300px;
 
   .inputField {
+    font-size: 1.125rem;
     width: 100%;
     outline: 0;
     padding: 15px;
@@ -34,6 +35,7 @@ const FormWrapper = styled.div`
     }
   }
   button {
+    font-size: 1.125rem;
     width: 100%;
     border: none;
     padding: 15px;
@@ -117,7 +119,7 @@ export default function HomeScreen(): JSX.Element {
                   name="EMAIL"
                   className="email inputField"
                   id="mce-EMAIL"
-                  placeholder="Email aqui, eu também não gosto de spam :)"
+                  placeholder="Seu email aqui"
                   required
                 />
                 <div
@@ -140,6 +142,10 @@ export default function HomeScreen(): JSX.Element {
                     Inscreva-se
                   </button>
                 </div>
+
+                <p style={{ fontSize: '12px' }}>
+                  Fica tranquilo, eu também não gosto de spam :)
+                </p>
               </div>
             </form>
           </div>
