@@ -9,6 +9,8 @@ export interface YouTubeVideo {
   thumbnail: string;
 }
 
+export type QueryYouTubeVideoInput = Pick<YouTubeVideo, 'id' | 'link'>;
+
 export const typeDefs = gql`
   type YouTubeVideo {
     id: String
@@ -19,13 +21,13 @@ export const typeDefs = gql`
     thumbnail: String
   }
 
-  # input QueryYouTubeVideoInput {
-  #   _id: String
-  #   title: String
-  # }
+  input QueryYouTubeVideoInput {
+    id: String
+    link: String
+  }
 
   extend type Query {
     youtubeVideos: [YouTubeVideo]!
-    # youtubeVideo(input: QueryYouTubeVideoInput): YouTubeVideo
+    youtubeVideo(input: QueryYouTubeVideoInput): YouTubeVideo
   }
 `;

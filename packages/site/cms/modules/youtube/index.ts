@@ -1,4 +1,4 @@
-import { typeDefs, YouTubeVideo } from './type';
+import { QueryYouTubeVideoInput, typeDefs, YouTubeVideo } from './type';
 import xmlParser from 'fast-xml-parser';
 import { IS_PROD } from '../../infra/db/createConfig';
 
@@ -28,6 +28,8 @@ async function cacheVideos(videos: Array<YouTubeVideo>) {
         const responseData = await response.json();
         const alreadyExists = responseData.errors;
         if (alreadyExists) {
+          // eslint-disable-next-line no-console, prettier/prettier
+          console.log('alreadyExists', video.title, JSON.stringify(responseData, null, 4));
           return true;
         }
 
@@ -36,7 +38,6 @@ async function cacheVideos(videos: Array<YouTubeVideo>) {
       .then(async (isInCache) => {
         // console.log('isInCache', isInCache, video.title);
         if (!isInCache) {
-          console.log('Heey, GH API Call!!!');
           await fetch('https://github-stars-api.herokuapp.com/', {
             method: 'POST',
             headers: {
@@ -63,7 +64,8 @@ async function cacheVideos(videos: Array<YouTubeVideo>) {
             }),
           })
             .then((res) => res.text())
-            .then((data) => console.log(data));
+            // eslint-disable-next-line no-console
+            .then((response) => console.log('GH_REGISTRY', response));
         }
 
         return isInCache;
@@ -86,7 +88,7 @@ const resolvers = {
         .then(async (res) => {
           const response = await res.text();
           const parsedResponse = xmlParser.parse(response);
-          return parsedResponse.feed.entry.map((video, index) => {
+          return parsedResponse.feed.entry.map((video) => {
             const description = video['media:group']['media:description']
               .split('\n')[0]
               .replace(/\\\\o/g, '')
@@ -107,6 +109,38 @@ const resolvers = {
             await cacheVideos(videos);
           }
           return videos;
+        });
+    },
+    async youtubeVideo(
+      _: unknown,
+      { input }: { input: QueryYouTubeVideoInput }
+    ): Promise<YouTubeVideo> {
+      const MATCH_YT_ID = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+      const videoId = input.link.match(MATCH_YT_ID)[7] || input.id;
+      const API_KEY = process.env.YOUTUBE_GOOGLE_API_KEY;
+      const YOUTUBE_API = `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${API_KEY}`;
+      return fetch(YOUTUBE_API)
+        .then((res) => res.json())
+        .then((response) => {
+          const video = response.items[0];
+          const description = video.snippet.description
+            .split('\n')[0]
+            .replace(/\\\\o/g, '')
+            .replace(/\\o/g, '');
+          return {
+            id: video.id,
+            date: new Date(video.snippet.publishedAt).toISOString(),
+            link: `https://youtu.be/${video.id}`,
+            title: video.snippet.title,
+            description,
+            thumbnail: `http://i1.ytimg.com/vi/${video.id}/hqdefault.jpg`,
+          };
+        })
+        .then(async (video) => {
+          if (!IS_PROD) {
+            await cacheVideos([video]);
+          }
+          return video;
         });
     },
   },
