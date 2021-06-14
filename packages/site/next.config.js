@@ -105,6 +105,11 @@ module.exports = withPlugins([withTM], {
         destination: 'https://discord.gg/SpsBHQJeXb',
         permanent: true,
       },
+      {
+        source: '/store-redirect/3zzn3YH/',
+        destination: 'https://amzn.to/3zzn3YH',
+        permanent: true,
+      },
       ...oldSite.map((item) => ({
         source: `/${item}/`,
         destination: `/${item}/index.html`,
