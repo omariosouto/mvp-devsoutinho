@@ -13,10 +13,13 @@ const resolvers = {
     async contributions(): Promise<Contribution[]> {
       const conn = await getDbConnection();
       return new Promise((resolve, reject) =>
-        conn.contributions.find({}, (err, data) => {
-          if (err) reject(err);
-          resolve(data);
-        })
+        conn.contributions
+          .find({})
+          .sort({ date: -1 })
+          .exec((err, data) => {
+            if (err) reject(err);
+            resolve(data);
+          })
       );
     },
     async contribution(
