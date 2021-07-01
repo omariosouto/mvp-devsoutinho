@@ -110,6 +110,11 @@ module.exports = withPlugins([withTM], {
         destination: 'https://amzn.to/3zzn3YH',
         permanent: true,
       },
+      {
+        source: '/store-redirect/3hpXSiX/',
+        destination: 'https://amzn.to/3hpXSiX',
+        permanent: true,
+      },
       ...oldSite.map((item) => ({
         source: `/${item}/`,
         destination: `/${item}/index.html`,
